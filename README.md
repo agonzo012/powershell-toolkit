@@ -22,16 +22,19 @@ real admin task and is documented with what it does and how to run it.
   they were first created by hand in the portal on Nov 21, 2026, and
   this script is the automated version of the same work.
   Run: `Connect-MgGraph -Scopes "User.ReadWrite.All","Group.ReadWrite.All","GroupMember.ReadWrite.All"` then `.\New-LabUsers.ps1`
+  Outcome: written and idempotent; not yet run against the live tenant — the users and groups already exist, so it would skip them.
 - **Get-VMStatus.ps1** — lists Azure VMs with their power state and size,
   so I can check what's running before I get charged. Uses the Az module.
   Run: `Connect-AzAccount` then `.\Get-VMStatus.ps1` (add
   `-ResourceGroupName "AlvinLab-RG"` for one resource group only).
   A VM showing "VM deallocated" costs nothing for compute.
+  Outcome: written; not yet run — it only reads, so it is the safe one to try first.
 - **Test-AppInstalled.ps1** — detection script for Intune: checks whether
   an app (7-Zip or Chrome) is installed on a device. Returns exit 0 when
   found, exit 1 when not. Checks the uninstall registry keys and the
   default install folders. Run: `.\Test-AppInstalled.ps1 -AppName "7-Zip"`
   or `.\Test-AppInstalled.ps1 -AppName "Google Chrome"`.
+  Outcome: written; not yet used in an Intune deployment — app deployment is blocked until a .intunewin package is prepared.
 
 ## Status
 
